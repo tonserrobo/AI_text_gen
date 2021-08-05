@@ -40,9 +40,9 @@ X_modified= np.reshape(X, (len(X), seq_length, 1))
 X_modified = X_modified / float(len(characters))
 Y_modified = np_utils.to_categorical(Y)
 
-n_width = 100 #number of neurons/model width
+n_width = 500 #number of neurons/model width
 epochs = 1
-batch_size = 10
+batch_size = 50
 
 #build model
 model = Sequential()
@@ -55,14 +55,14 @@ model.add(Dense(Y_modified.shape[1], activation = 'softmax'))
 model.compile(loss='categorical_crossentropy', optimizer='adam')
 #train
 
-if training_flag == 1:
+if training_flag == 0:
 
     model.fit(X_modified, Y_modified, epochs = epochs, batch_size = batch_size)
-    model.save_weights('mary_shelly_text_Gen.h5')
+    model.save_weights('mary_shelly_text_Gen_v2.h5')
 
 else: 
 
-    model.load_weights(r'C:\Users\tonyr\Dropbox\Companies + Projects\Visio Data Science\Projects\Text_generator\AI_text_gen\mary_shelly_text_Gen.h5')
+    model.load_weights(r'C:\Users\tonyr\Dropbox\Companies + Projects\Visio Data Science\Projects\Text_generator\AI_text_gen\mary_shelly_text_Gen_v2.h5')
     ## use model to gen text
     string_mapped = X[99]
     full_string = [n_to_char[value] for value in string_mapped]
